@@ -80,11 +80,14 @@ More commands for running other settings can be found in the Configs file.
 Our code of CCL is based on the implementation of FixMatch. We thank the authors of the [FixMatch](https://github.com/kekmodel/FixMatch-pytorch) for making their code available to the public.
 
 ## Citation
+If you find the code useful in your research, please consider citing our paper:
+```bibtex
 @inproceedings{zhou2024CCL,
   title={Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition},
   author={Zi-Hao Zhou and Si-Yuan Fang and Zi-Jing Zhou and Tong-Wei and Yuan-Yu Wan and Min-Ling Zhang},
   booktitle={Advances in Neural Information Processing Systems 37},
   year={2024}
 }
+```
 
 
