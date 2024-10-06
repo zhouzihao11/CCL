@@ -1,7 +1,7 @@
-# [NIPS 2024 in submission] 
+# [NeurIPS'24] Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition
 
 <!-- This is PyTorch implementation of Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition. -->
-This is PyTorch implementation of [Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition] at NIPS 2024.
+This is PyTorch implementation of [Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition] at NeurIPS 2024.
 ## Abstract
 Long-tailed semi-supervised learning is a challenging task that aims to train a model using limited labeled data that exhibit a long-tailed label distribution. State-of-the-art LTSSL methods rely on high-quality pseudo-labels assigned for large-scale unlabeled data. However, most of them overlook the effect of representations learned by the network and are often less effective when dealing with unlabeled data from the real world, which typically follows a distinct distribution compared to the labeled data.In this paper, we present a probabilistic framework that unifies many recent proposals to cope with long-tail learning problems. Our framework deduces the class-balanced supervised contrastive loss when employing the Gaussian kernel density estimation, and generalizes to unlabeled data based on reliable and smoothed continuous pseudo-labels. We progressively estimate the underlying distribution and optimize its alignment with model predictions to address the agnostic distribution of unlabeled data in the real world.Extensive experiments on several datasets with varying unlabeled data distribution show the advantage of our proposal over previous state-of-the-art methods, e.g., more than 4% improvements on ImageNet-127. The source code is available in the supplementary material.
 
@@ -79,8 +79,12 @@ More commands for running other settings can be found in the Configs file.
 ## Acknowledgement
 Our code of CCL is based on the implementation of FixMatch. We thank the authors of the [FixMatch](https://github.com/kekmodel/FixMatch-pytorch) for making their code available to the public.
 
-
-
-
+## Citation
+@inproceedings{zhou2024CCL,
+  title={Continuous Contrastive Learning for Long-Tailed Semi-Supervised Recognition},
+  author={Zi-Hao Zhou and Si-Yuan Fang and Zi-Jing Zhou and Tong-Wei and Yuan-Yu Wan and Min-Ling Zhang},
+  booktitle={Advances in Neural Information Processing Systems 37},
+  year={2024}
+}
 
 
