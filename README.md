@@ -74,7 +74,7 @@ For reversed:
 ```
 python train.py --dataset cifar100 --num-max 50 --num-max-u 400 --arch wideresnet --batch-size 64 --lr 0.03  --imb-ratio-label 10 --imb-ratio-unlabel 10  --flag-reverse-LT 1 --out out/cifar-100/N50_M400/reversed_10
 ```
-More commands for running other settings can be found in the Configs file. 
+More commands for running other settings can be found in the configs file. 
 
 ## Acknowledgement
 Our code of CCL is based on the implementation of FixMatch. We thank the authors of the [FixMatch](https://github.com/kekmodel/FixMatch-pytorch) for making their code available to the public.

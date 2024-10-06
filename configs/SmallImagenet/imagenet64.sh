@@ -1,1 +1,1 @@
-python train.py --dataset smallimagenet --arch resnet --img-size 32 --batch-size 32 --mu 2 --lr 0.03 --tau 0.1 --labmda2 1.5 --out out/imagenet/32/ --gpu-id 0
+python train.py --dataset smallimagenet --arch resnet --img-size 64 --batch-size 32 --mu 2 --lr 0.03 --tau 0.1 --labmda2 1.5 --out out/imagenet/32/ --gpu-id 0
