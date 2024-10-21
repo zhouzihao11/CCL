@@ -45,7 +45,7 @@ class SemiConLoss(nn.Module):
         self.py_unlabeled = args.py_uni.to(args.device)
         self.py_Num = torch.zeros(num_class).to(args.device)
 
-    def forward(self, feat, label, la):
+    def forward(self, feat, label, la=0):
         label = label.float()
         # la = torch.log(self.py_unlabeled ** 1.0 + 1e-12).to(self.args.device)
         label_feat = feat[:self.num_class + 2 * self.labeled_bs, :]

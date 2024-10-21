@@ -73,11 +73,15 @@ def save_checkpoint(state, is_best, checkpoint, filename='checkpoint.pth.tar', e
 
 
 def set_seed(args):
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    if args.n_gpu > 0:
-        torch.cuda.manual_seed_all(args.seed)
+    seed = args.seed
+    if seed is not None:
+        print(f"Deterministic with seed = {seed}")
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
 
 def get_cosine_schedule_with_warmup(optimizer,
@@ -152,7 +156,7 @@ def main():
                         help='directory to output the result')
     parser.add_argument('--resume', default='', type=str,
                         help='path to latest checkpoint (default: none)')
-    parser.add_argument('--seed', default=None, type=int,
+    parser.add_argument('--seed', default=0, type=int,
                         help="random seed")
     parser.add_argument("--local_rank", type=int, default=-1,
                         help="For distributed training: local_rank")
