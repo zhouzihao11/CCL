@@ -5,7 +5,7 @@
       <paths name="a6000">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/syfang/DELT" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/CCL" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

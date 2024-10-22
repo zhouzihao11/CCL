@@ -3,6 +3,7 @@
   <component name="SshConfigs">
     <configs>
       <sshConfig authType="PASSWORD" host="10.201.17.138" id="3a910def-59c6-4060-8bb4-edc0dc7661a8" port="22" nameFormat="DESCRIPTIVE" username="syfang" useOpenSSHConfig="true" />
+      <sshConfig authType="PASSWORD" host="connect.westc.gpuhub.com" id="fb9cda0d-87b8-493c-8180-957486f72c91" port="46488" nameFormat="DESCRIPTIVE" username="root" useOpenSSHConfig="true" />
     </configs>
   </component>
 </project>
