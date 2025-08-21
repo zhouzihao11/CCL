@@ -1,1 +1,1 @@
-python train.py --dataset cifar10 --num-max 500 --num-max-u 4000 --arch wideresnet --batch-size 64 --lr 0.03 --seed 0 --imb-ratio-label 100 --imb-ratio-unlabel 100 --out out/cifar-10/N500_M4000/reverse_100 --beta 0.9 --est-epoch 20 --gpu-id 0 --flag-reverse-LT 1
+python train.py --dataset cifar10 --num-max 500 --num-max-u 4000 --arch wideresnet --batch-size 64 --lr 0.03 --seed 0 --imb-ratio-label 100 --imb-ratio-unlabel 100 --out out/cifar-10/N500_M4000/reverse_100_4.0_1 --beta 0.999 --alpha 0.999 --est-epoch 5 --upbatch 100 --gpu-id 0 --flag-reverse-LT 1

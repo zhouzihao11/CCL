@@ -178,6 +178,8 @@ def main():
                         help='tau for head consistency')
     parser.add_argument('--est-epoch', default=5, type=int,
                         help='the start step to estimate the distribution')
+    parser.add_argument('--upbatch', default=500, type=int,
+                        help='the update frequency to estimate the distribution')
     parser.add_argument('--img-size', default=32, type=int,
                         help='image size for small imagenet')
     parser.add_argument('--alpha', default=0.5, type=float,
@@ -459,7 +461,7 @@ def train(args, labeled_trainloader, unlabeled_trainloader, test_loader,
             del logits, logits_b
             l_u_s = F.cross_entropy(logits_x, targets_x, reduction='mean')
             l_b_s = F.cross_entropy(logits_x_b + logits_la_s, targets_x, reduction='mean')
-            logits_la_u = (- compute_adjustment_by_py((1 - pro) * py_labeled + pro * py_all, 1.0, args) +
+            logits_la_u = (- compute_adjustment_by_py((1 - pro) * py_labeled + pro * py_all, args.tau, args) +
                            compute_adjustment_by_py(py_unlabeled, 1 + args.tau / 2, args))
             logits_co = 1 / 2 * (logits_x_w + logits_la_u) + 1 / 2 * logits_x_b_w
             energy = -torch.logsumexp((logits_co.detach()) / args.T, dim=1)
@@ -528,6 +530,12 @@ def train(args, labeled_trainloader, unlabeled_trainloader, test_loader,
             num_all += torch.sum(pseudo_label_co * mask, dim=0)
             # num_unlabeled += torch.sum(pseudo_label_co * mask_l * mask, dim=0)
             num_unlabeled += torch.sum(pseudo_label_co * mask_l * maskcon, dim=0)
+            if (batch_idx+1) % args.upbatch == 0 and epoch>args.est_epoch:
+                py_unlabeled = args.alpha * py_unlabeled + (1 - args.alpha) * num_unlabeled / sum(num_unlabeled)
+                py_all = args.beta * py_all + (1 - args.beta) * num_all / sum(num_all)
+                num_unlabeled = torch.ones(args.num_classes).to(args.device)
+                num_all = torch.ones(args.num_classes).to(args.device)
+
             batch_time.update(time.time() - end)
             end = time.time()
             bar.suffix = '({batch}/{size}) | Batch: {bt:.3f}s | Total: {total:} | ETA: {eta:} | ' \
@@ -545,9 +553,9 @@ def train(args, labeled_trainloader, unlabeled_trainloader, test_loader,
             bar.next()
         bar.finish()
 
-        if epoch > args.est_epoch:
-            py_unlabeled = args.alpha * py_unlabeled + (1 - args.alpha) * num_unlabeled / sum(num_unlabeled)
-            py_all = args.beta * py_all + (1 - args.beta) * num_all / sum(num_all)
+        # if epoch > args.est_epoch:
+        #     py_unlabeled = args.alpha * py_unlabeled + (1 - args.alpha) * num_unlabeled / sum(num_unlabeled)
+        #     py_all = args.beta * py_all + (1 - args.beta) * num_all / sum(num_all)
         print('\n')
         print(py_unlabeled)
         print(py_all)
