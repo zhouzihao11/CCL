@@ -461,7 +461,7 @@ def train(args, labeled_trainloader, unlabeled_trainloader, test_loader,
             del logits, logits_b
             l_u_s = F.cross_entropy(logits_x, targets_x, reduction='mean')
             l_b_s = F.cross_entropy(logits_x_b + logits_la_s, targets_x, reduction='mean')
-            logits_la_u = (- compute_adjustment_by_py((1 - pro) * py_labeled + pro * py_all, 2.0, args) +
+            logits_la_u = (- compute_adjustment_by_py((1 - pro) * py_labeled + pro * py_all, 1.0, args) +
                            compute_adjustment_by_py(py_unlabeled, 1 + args.tau / 2, args))
             logits_co = 1 / 2 * (logits_x_w + logits_la_u) + 1 / 2 * logits_x_b_w
             energy = -torch.logsumexp((logits_co.detach()) / args.T, dim=1)
